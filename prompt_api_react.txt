@@ -1,0 +1,115 @@
+🚀 PROMPT PARA IA — CONSUMIR ENDPOINTS REALES EN REACT
+
+Quiero que actualices mi proyecto React para que en lugar de usar mock data, consuma datos reales desde una API REST externa.  
+Te paso toda la información necesaria para que adaptes el código correctamente.  
+
+---
+
+### 🔹 Contexto del proyecto
+
+Mi app está hecha con **React y JavaScript**, y tiene un **Dashboard.jsx** que actualmente usa datos mock a través del archivo `services/api.js`.  
+El Dashboard muestra consumo de agua, anomalías y zonas críticas.  
+Los componentes principales son:
+- `WaterPulse` (muestra el consumo)
+- `AlertsList` (muestra anomalías)
+- `MapView` (muestra zonas críticas)
+
+---
+
+### 🔹 Objetivo
+
+1. Crear o modificar el archivo `src/services/api.js` para que consuma los endpoints reales.
+2. Actualizar el componente `Dashboard.jsx` para que use esos datos reales.
+3. Asegurarte de que los nombres de los campos que devuelve la API coincidan con lo que espera el Dashboard.
+4. Mantener toda la lógica de carga, error y actualización automática (cada 30 s).
+5. No modificar el diseño ni el JSX del Dashboard, solo adaptar la obtención y el mapeo de datos.
+6. Añadir uso de variable de entorno `VITE_API_URL` para definir la URL base de la API.
+
+---
+
+### 🔹 Endpoints reales
+
+**1️⃣ GET `/consumption/summary`**
+```json
+[
+  {
+    "id": 1,
+    "neighborhood": "Sants-Montjuic",
+    "type": "spike",
+    "severity": "high",
+    "liters": 240.8,
+    "deviation": 18,
+    "timestamp": "2025-10-15T08:00"
+  }
+]
+```
+
+**2️⃣ GET `/consumption/`**
+```json
+[
+  {
+    "id": 1,
+    "neighborhood": "Gracia",
+    "type": "leak",
+    "severity": "high",
+    "liters": 512.4,
+    "deviation": 24,
+    "timestamp": "2025-10-15T03:00"
+  }
+]
+```
+
+**3️⃣ GET `/anomalies/`**
+```json
+[
+  {
+    "id": 1,
+    "neighborhood": "Gracia",
+    "type": "leak",
+    "severity": "high",
+    "liters": 510.2,
+    "deviation": "+18",
+    "timestamp": "2025-10-15T03:00"
+  }
+]
+```
+
+---
+
+### 🔹 Requerimientos técnicos
+
+- Base URL:  
+  ```js
+  const BASE_URL = import.meta.env.VITE_API_URL || 'https://repteweb-backend.onrender.com';
+  ```
+
+- Crear funciones:
+  ```js
+  export const api = {
+    getConsumption: async () => {...},  // Llama a /consumption/summary
+    getAnomalies: async () => {...},     // Llama a /anomalies/
+    getLatestIncidents: async () => {...} // Llama a /consumption/
+  };
+  ```
+
+- Manejar errores y loading tal como ya lo hace el Dashboard.
+- Hacer que el Dashboard actualice los datos automáticamente cada 30 s usando `setInterval(fetchData, 30000)` (ya está implementado).
+- Adaptar los nombres de los campos si es necesario, por ejemplo:
+  - `neighborhood` → `zone` (si el componente espera “zone”)
+  - `timestamp` → `date`
+  - `liters` → `value`  
+  (solo si el código original no los reconoce directamente).
+
+---
+
+### 🔹 Entregable esperado
+
+1. Archivo completo `src/services/api.js` con las llamadas reales a la API.  
+2. Archivo `Dashboard.jsx` actualizado y funcionando con los datos reales.  
+3. Sin modificar el estilo ni la UI.  
+4. Listo para ejecutarse con `npm run dev` usando `VITE_API_URL=https://repteweb-backend.onrender.com`.
+
+---
+
+👉 **Tu tarea como IA:**  
+Genera el código final de `api.js` y `Dashboard.jsx` completamente funcional, usando `fetch` o `axios`, con buen manejo de errores, y listo para integrarse en el proyecto React.
