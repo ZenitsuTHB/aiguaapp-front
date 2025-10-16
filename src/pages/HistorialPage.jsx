@@ -228,19 +228,20 @@ export function HistorialPage() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="mb-8 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div className="mb-6">
+        {/* Título */}
+        <div className="flex items-center gap-3 mb-4">
           <History className="w-8 h-8 text-sky-600" />
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Historial d'Anomalies</h1>
-            <p className="text-gray-600 mt-1">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Historial d'Anomalies</h1>
+            <p className="text-gray-600 text-sm sm:text-base mt-1">
               {filteredAnomalies.length} de {anomalies.length} anomalies
             </p>
           </div>
         </div>
         
         {/* Selector de formato y botón exportar */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
           <select
             value={exportFormat}
             onChange={(e) => setExportFormat(e.target.value)}
@@ -253,76 +254,76 @@ export function HistorialPage() {
           <button
             onClick={handleExport}
             disabled={filteredAnomalies.length === 0}
-            className="flex items-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             <Download className="w-4 h-4" />
-            Exportar {exportFormat.toUpperCase()}
+            <span className="whitespace-nowrap">Exportar {exportFormat.toUpperCase()}</span>
           </button>
         </div>
       </div>
 
       {/* Panel de estadísticas */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-sky-600">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 border-l-4 border-sky-600">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Anomalies</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Total Anomalies</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.total}</p>
               </div>
-              <FileText className="w-8 h-8 text-sky-600 opacity-50" />
+              <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-sky-600 opacity-50" />
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-red-600">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 border-l-4 border-red-600">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Crítiques</p>
-                <p className="text-2xl font-bold text-red-600">{stats.bySeverity.high || 0}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Crítiques</p>
+                <p className="text-xl sm:text-2xl font-bold text-red-600">{stats.bySeverity.high || 0}</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-red-600 opacity-50" />
+              <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-red-600 opacity-50" />
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-amber-500">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 border-l-4 border-amber-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Mitjanes</p>
-                <p className="text-2xl font-bold text-amber-600">{stats.bySeverity.medium || 0}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Mitjanes</p>
+                <p className="text-xl sm:text-2xl font-bold text-amber-600">{stats.bySeverity.medium || 0}</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-amber-500 opacity-50" />
+              <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-amber-500 opacity-50" />
             </div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-cyan-600">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 border-l-4 border-cyan-600">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Consum Mitjà</p>
-                <p className="text-2xl font-bold text-cyan-600">{stats.avgLiters.toFixed(0)}L</p>
+                <p className="text-xs sm:text-sm text-gray-600">Consum Mitjà</p>
+                <p className="text-xl sm:text-2xl font-bold text-cyan-600">{stats.avgLiters.toFixed(0)}L</p>
               </div>
-              <Calendar className="w-8 h-8 text-cyan-600 opacity-50" />
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-600 opacity-50" />
             </div>
           </div>
         </div>
       )}
 
       {/* Panel de filtros */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
         <div className="flex items-center gap-2 mb-4">
           <Filter className="w-5 h-5 text-sky-600" />
-          <h2 className="text-lg font-semibold text-gray-900">Filtres</h2>
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900">Filtres</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
           {/* Filtro por barrio */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Barri
             </label>
             <select
               value={filters.neighborhood}
               onChange={(e) => setFilters({ ...filters, neighborhood: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-xs sm:text-sm"
             >
               <option value="all">Tots els barris</option>
               {uniqueNeighborhoods.map(n => (
@@ -333,13 +334,13 @@ export function HistorialPage() {
           
           {/* Filtro por tipo */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Tipus
             </label>
             <select
               value={filters.type}
               onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-xs sm:text-sm"
             >
               <option value="all">Tots els tipus</option>
               <option value="leak">Fuita (leak)</option>
@@ -351,13 +352,13 @@ export function HistorialPage() {
           
           {/* Filtro por severidad */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Severitat
             </label>
             <select
               value={filters.severity}
               onChange={(e) => setFilters({ ...filters, severity: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-xs sm:text-sm"
             >
               <option value="all">Totes</option>
               <option value="high">Alta (high)</option>
@@ -368,27 +369,27 @@ export function HistorialPage() {
           
           {/* Filtro fecha desde */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Des de
             </label>
             <input
               type="date"
               value={filters.dateFrom}
               onChange={(e) => setFilters({ ...filters, dateFrom: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-xs sm:text-sm"
             />
           </div>
           
           {/* Filtro fecha hasta */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Fins a
             </label>
             <input
               type="date"
               value={filters.dateTo}
               onChange={(e) => setFilters({ ...filters, dateTo: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 text-xs sm:text-sm"
             />
           </div>
         </div>
@@ -404,7 +405,7 @@ export function HistorialPage() {
                 dateFrom: '',
                 dateTo: ''
               })}
-              className="text-sm text-sky-600 hover:text-sky-700 font-medium"
+              className="text-xs sm:text-sm text-sky-600 hover:text-sky-700 font-medium"
             >
               Restablir tots els filtres
             </button>
@@ -414,19 +415,19 @@ export function HistorialPage() {
 
       {/* Ranking de barrios más afectados */}
       {stats && stats.mostAffected.length > 0 && (
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Top 5 Barris Més Afectats</h2>
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Top 5 Barris Més Afectats</h2>
           <div className="space-y-3">
             {stats.mostAffected.map(([neighborhood, count], index) => {
               const percentage = (count / stats.total) * 100;
               return (
                 <div key={neighborhood}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-xs sm:text-sm font-medium text-gray-700 truncate mr-2">
                       {index + 1}. {neighborhood}
                     </span>
-                    <span className="text-sm text-gray-600">
-                      {count} anomalies ({percentage.toFixed(1)}%)
+                    <span className="text-xs sm:text-sm text-gray-600 whitespace-nowrap">
+                      {count} ({percentage.toFixed(1)}%)
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -444,25 +445,25 @@ export function HistorialPage() {
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[640px]">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Data/Hora
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Barri
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Tipus
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Severitat
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Litres
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Desviació
                 </th>
               </tr>
@@ -470,7 +471,7 @@ export function HistorialPage() {
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredAnomalies.length === 0 ? (
                 <tr>
-                  <td colSpan="6" className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan="6" className="px-3 sm:px-6 py-8 sm:py-12 text-center text-gray-500 text-sm">
                     {anomalies.length === 0 
                       ? "No hi ha anomalies registrades" 
                       : "No s'han trobat anomalies amb els filtres seleccionats"}
@@ -479,17 +480,22 @@ export function HistorialPage() {
               ) : (
                 filteredAnomalies.map((anomaly) => (
                   <tr key={anomaly.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {new Date(anomaly.timestamp).toLocaleString('ca-ES')}
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900">
+                      <div className="whitespace-nowrap">
+                        {new Date(anomaly.timestamp).toLocaleDateString('ca-ES', { day: '2-digit', month: '2-digit' })}
+                      </div>
+                      <div className="text-gray-500 text-xs">
+                        {new Date(anomaly.timestamp).toLocaleTimeString('ca-ES', { hour: '2-digit', minute: '2-digit' })}
+                      </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium text-gray-900">
                       {anomaly.neighborhood}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-600">
                       {anomaly.type}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <span className={`px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap ${
                         anomaly.severity === 'high' ? 'bg-red-100 text-red-800' :
                         anomaly.severity === 'medium' ? 'bg-amber-100 text-amber-800' :
                         'bg-cyan-100 text-cyan-800'
@@ -497,10 +503,10 @@ export function HistorialPage() {
                         {anomaly.severity}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                       {anomaly.liters}L
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-600">
                       {anomaly.deviation}%
                     </td>
                   </tr>
